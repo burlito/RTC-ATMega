@@ -1,4 +1,6 @@
-/**
+/*!
+  \file rtc.h
+  
   The MIT License (MIT)
 
   Copyright (c) 2014 Andrej Manduch, Adrián Matejov, XLC Team
@@ -22,14 +24,14 @@
   THE SOFTWARE.
 */
 
-/**
+/*! \file
 	this RTC library is made for ATMega328p and uses Timer1 as source
 	of time.
 */
 
 #include "config.h"
 
-/** void rtc_init(void)
+/*! \fn void rtc_init(void)
 
 	\brief initialize rtc
 
@@ -37,7 +39,7 @@
 */
 void rtc_init(void);
 
-/** uint16_t get_rtc(void)
+/*! \fn uint16_t get_rtc(void)
 
 	\brief will safelly return value of internal T1 counter
 
@@ -50,7 +52,8 @@ void rtc_init(void);
 */
 uint16_t get_rtc(void);
 
-/** uint32_t get_full_rtc(void)
+#ifdef RTC_32_BIT
+/*! \fn uint32_t get_full_rtc(void)
 
 	\brief function will return 32 bit value of rtc
 
@@ -63,11 +66,11 @@ uint16_t get_rtc(void);
 
 	\return 32 bit unsigned value of current rtc value
 */
-#ifdef RTC_32_BIT
 uint32_t get_full_rtc(void);
 #endif /* RTC_32_BIT */
 
-/** uint32_t get_rtc_ms(void)
+#ifdef RTC_32_BIT
+/*! \fn uint32_t get_rtc_ms(void)
 	\brief it's used to messure time in miliseconds
 
 	Function internally read rtc timer and overflow var and
@@ -78,13 +81,13 @@ uint32_t get_full_rtc(void);
 
 	\return 32 bit undigned value of current ms from start timer initialization
 */
-#ifdef RTC_32_BIT
 uint32_t get_rtc_ms(void);
 #else /* RTC_32_BIT */
 uint16_t get_rtc_ms(void);
 #endif /* RTC_32_BIT */
 
-/** uint32_t get_rtc_us(void)
+#ifdef RTC_32_BIT
+/*! \fn uint32_t get_rtc_us(void)
 	\brief it's used to messure time in microseconds
 
 	Function internally read rtc timer and overflow var and
@@ -95,13 +98,13 @@ uint16_t get_rtc_ms(void);
 
 	\return 32 bit undigned value of current ms from start timer initialization
 */
-#ifdef RTC_32_BIT
 uint32_t get_rtc_us(void);
 #else /* RTC_32_BIT */
 uint16_t get_rtc_us(void);
 #endif /* RTC_32_BIT */
 
-/** uint32_t ticks2ms(uint32_t)
+#ifdef RTC_32_BIT
+/*! \fn uint32_t ticks2ms(uint32_t)
 	\brief transform TC1 ticks to miliseconds
 
 	function translate get_rtc and get_full_rtc value in to
@@ -115,13 +118,13 @@ uint16_t get_rtc_us(void);
 
 	\return unsigned 32 bit integer in miliseconds
 */
-#ifdef RTC_32_BIT
 uint32_t ticks2ms(uint32_t);
 #else /* RTC_32_BIT */
 uint16_t ticks2ms(uint16_t);
 #endif /* RTC_32_BIT */
 
-/** uint32_t ticks2us(uint32_t)
+#ifdef RTC_32_BIT
+/*! \fn uint32_t ticks2us(uint32_t)
 	\brief transform TC1 ticks to microseconds
 
 	\note if RTC_32_BIT macro is not pressent function will change
@@ -129,7 +132,6 @@ uint16_t ticks2ms(uint16_t);
 
 	see ticks2ms()
 */
-#ifdef RTC_32_BIT
 uint32_t ticks2us(uint32_t);
 #else /* RTC_32_BIT */
 uint16_t ticks2us(uint16_t);

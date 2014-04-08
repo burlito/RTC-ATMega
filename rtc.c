@@ -1,4 +1,4 @@
-/**
+/*!
   The MIT License (MIT)
 
   Copyright (c) 2014 Andrej Manduch, Adrián Matejov, XLC Team
