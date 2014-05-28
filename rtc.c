@@ -72,7 +72,7 @@ uint16_t get_rtc(void)
 	for (i = 0; i < 4; i++) {
 		((uint8_t *)&tmp)[1] = TCNT1H;
 		((uint8_t *)&tmp)[0] = TCNT1L;
-		if ((uint8_t)((&tmp)[1]) == TCNT1H)
+		if (((uint8_t *)&tmp)[1] == TCNT1H)
 			return tmp;
 	}
 
@@ -102,7 +102,6 @@ uint32_t get_full_rtc(void)
 			return ret;
 	}
 
-	return 1;
 	/* hopefully this will not be needed */
 	ATOMIC_BLOCK(ATOMIC_FORCEON) {
 		((uint16_t *)&ret)[1] = high_bites;
@@ -195,12 +194,12 @@ uint16_t ticks2us(uint16_t ticks)
 #ifdef RTC_32_BIT
 uint32_t get_rtc_us(void)
 {
-	ticks2us(get_full_rtc());
+	return ticks2us(get_full_rtc());
 }
 #else /* RTC_32_BIT */
 uint16_t get_rtc_us(void)
 {
-	ticks2us(get_rtc());
+	return ticks2us(get_rtc());
 }
 #endif /* RTC_32_BIT */
 #endif /* RTC_US_RESOLUTION */
